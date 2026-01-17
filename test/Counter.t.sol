@@ -17,6 +17,26 @@ contract CounterTest is Test {
         assertEq(counter.number(), 1);
     }
 
+    function test_Decrement() public {
+        counter.decrement();
+        assertEq(counter.number(), -1);
+    }
+
+    function test_MultiplyByTwo() public {
+        counter.multiplyByTwo();
+        assertEq(counter.number(), 2);
+    }
+
+    function test_DivideByTwo() public {
+        counter.divideByTwo();
+        assertEq(counter.number(), 0);
+    }
+
+    function test_Reset() public {
+        counter.reset();
+        assertEq(counter.number(), 0);
+    }
+
     function testFuzz_SetNumber(uint256 x) public {
         counter.setNumber(x);
         assertEq(counter.number(), x);

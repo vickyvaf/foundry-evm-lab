@@ -15,4 +15,16 @@ contract Counter {
     function decrement() public {
         number--;
     }
+
+    function multiplyByTwo() public {
+        number *= 2;
+    }
+
+    function divideByTwo() public {
+        number /= 2;
+    }
+
+    function reset() public {
+        number = 0;
+    }
 }

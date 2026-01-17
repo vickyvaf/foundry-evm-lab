@@ -12,6 +12,7 @@
 
     <button onclick="increment()">+</button>
     <button onclick="decrement()">-</button>
+    <button onclick="reset()">Reset</button>
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/ethers/6.10.0/ethers.umd.min.js"></script>
     <script>
@@ -19,7 +20,8 @@
         const abi = [
             "function count() view returns (uint256)",
             "function increment()",
-            "function decrement()"
+            "function decrement()",
+            "function reset()"
         ];
 
         let provider;
@@ -52,6 +54,12 @@
             } catch (e) {
                 alert("Cannot decrement below zero");
             }
+        }
+
+        async function reset() {
+            const tx = await contract.reset();
+            await tx.wait();
+            refresh();
         }
 
         init();
