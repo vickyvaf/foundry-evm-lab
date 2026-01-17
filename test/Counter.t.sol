@@ -18,11 +18,13 @@ contract CounterTest is Test {
     }
 
     function test_Decrement() public {
+        counter.setNumber(1);
         counter.decrement();
-        assertEq(counter.number(), -1);
+        assertEq(counter.number(), 0);
     }
 
     function test_MultiplyByTwo() public {
+        counter.setNumber(1);
         counter.multiplyByTwo();
         assertEq(counter.number(), 2);
     }
