@@ -1,66 +1,67 @@
-## Foundry
+# Token Project
 
-**Foundry is a blazing fast, portable and modular toolkit for Ethereum application development written in Rust.**
+A custom ERC20 Token project built with Foundry.
 
-Foundry consists of:
+## Overview
 
-- **Forge**: Ethereum testing framework (like Truffle, Hardhat and DappTools).
-- **Cast**: Swiss army knife for interacting with EVM smart contracts, sending transactions and getting chain data.
-- **Anvil**: Local Ethereum node, akin to Ganache, Hardhat Network.
-- **Chisel**: Fast, utilitarian, and verbose solidity REPL.
+This project implements a standard ERC20 token using OpenZeppelin contracts, featuring:
 
-## Documentation
+- **Name**: `Token`
+- **Symbol**: `TOKEN`
+- **Access Control**: Owner-only minting.
+- **Constraints**: Custom `maxMint` modifier limiting mints to a maximum of 100 tokens per transaction.
 
-https://book.getfoundry.sh/
+## Contract Architecture
+
+- `src/Token.sol`: The main token contract inheriting from `ERC20` and `Ownable`.
+- `script/Token.s.sol`: Deployment script for the Base Sepolia testnet.
+
+## Prerequisites
+
+- [Foundry](https://book.getfoundry.sh/getting-started/installation) installed on your machine.
 
 ## Usage
 
-### Build
+### 1. Build
+
+Compile the smart contracts:
 
 ```shell
 $ forge build
 ```
 
-### Test
+### 2. Test
+
+Run the test suite (if available):
 
 ```shell
 $ forge test
 ```
 
-### Format
+### 3. Deploy
 
-```shell
-$ forge fmt
+The project is configured to deploy to **Base Sepolia**.
+
+#### Setup Environment
+
+Ensure your `.env` file is configured with the necessary keys (as used in `foundry.toml` and `script/Token.s.sol`):
+
+```ini
+BASE_SEPOLIA_RPC_URL=https://sepolia.base.org
+BASE_SEPOLIA_PRIVATE_KEY=0x...
 ```
 
-### Gas Snapshots
+#### Run Deployment Script
+
+Load the environment variables and run the script:
 
 ```shell
-$ forge snapshot
+$ source .env
+$ forge script script/Token.s.sol:TokenScript --rpc-url base_sepolia --broadcast
 ```
 
-### Anvil
+## Tools
 
-```shell
-$ anvil
-```
-
-### Deploy
-
-```shell
-$ forge script script/Counter.s.sol:CounterScript --rpc-url <your_rpc_url> --private-key <your_private_key>
-```
-
-### Cast
-
-```shell
-$ cast <subcommand>
-```
-
-### Help
-
-```shell
-$ forge --help
-$ anvil --help
-$ cast --help
-```
+- **Forge**: Compile, test, and deploy smart contracts.
+- **Cast**: Interact with the blockchain and smart contracts from the command line.
+- **Anvil**: Local Ethereum node for testing.
